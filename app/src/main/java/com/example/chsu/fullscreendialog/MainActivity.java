@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         openDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                openDialog.setVisibility(View.INVISIBLE);
                 showDialog();
                 Toast.makeText(MainActivity.this, "Tap to close", Toast.LENGTH_SHORT).show();
             }
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right);
+
         transaction.add(android.R.id.content, dialogFragment).addToBackStack(null).commit();
     }
 }

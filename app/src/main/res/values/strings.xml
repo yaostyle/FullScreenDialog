@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">FullScreenDialog</string>
+    <string name="txt_full_screen_dialog">Full Screen Dialog</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_open_dialog">Open Dialog</string>
 </resources>

@@ -1,6 +1,10 @@
 package com.example.chsu.fullscreendialog;
 
-import android.annotation.SuppressLint;
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.app.ActivityOptions;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
@@ -10,27 +14,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = MainActivity.class.getName();
     static Button openDialog;
-    Button closeDialog;
-    static Dialog dialog;
     static CustomDialogFragment dialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RelativeLayout rLayout;
 
         openDialog = findViewById(R.id.open);
 
@@ -67,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(@NonNull LayoutInflater inflater,
                                  @Nullable ViewGroup container,
                                  @Nullable Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.full_screen, container, false  );
+            View dialogView = inflater.inflate(R.layout.full_screen, container, false);
+
+            Button closeDialog = dialogView.findViewById(R.id.close);
+
+            closeDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   dialogFragment.dismissAllowingStateLoss();
+                }
+            });
+
+            return dialogView;
         }
 
         @NonNull
